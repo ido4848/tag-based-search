@@ -14,12 +14,13 @@ function init(){
 function mainLogic(){
   var book = new models.Book({title:"winnie the poo the"});
   book.save().then((book) => {
-    console.log(book);
     var searchEngine = require('../../index');
     searchEngine.search("poo").then((results) => {
+      console.log("Search results for poo:");
       console.log(results);
     });
-  });
+  })
+  .catch(console.error);
 }
 
 function start(){

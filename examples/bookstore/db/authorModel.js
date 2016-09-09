@@ -9,6 +9,7 @@ var authorSchema = mongoose.Schema({
     bornDate: Date
 });
 
-tagBasedSearch.indexSchema(authorSchema);
+var Author = mongoose.model('Author', authorSchema);
+tagBasedSearch.indexSchema(Author);
 
-module.exports = mongoose.model('Author', authorSchema);
+module.exports = Author;

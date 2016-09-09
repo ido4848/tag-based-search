@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var searchTagSchema = mongoose.Schema({
     word: {type:String, required: true},
-    matching: [{ type : mongoose.Schema.Types.ObjectId}]
+    matching: [{ matchId: mongoose.Schema.Types.ObjectId, model: String}]
 });
 
 searchTagSchema.index({ word: 1 }, { unique: true });

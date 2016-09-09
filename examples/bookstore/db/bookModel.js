@@ -7,6 +7,8 @@ var bookSchema = mongoose.Schema({
     description: String
 });
 
-tagBasedSearch.indexSchema(bookSchema);
 
-module.exports = mongoose.model('Book', bookSchema);
+var Book = mongoose.model('Book', bookSchema);
+tagBasedSearch.indexSchema(Book);
+
+module.exports = Book;

@@ -25,20 +25,21 @@ function extractTags(value) {
     return uniqueCleanTags;
 }
 
-function handleNewDocumentTag(actualDoc, tagName) {
+function handleNewDocumentTag(model, actualDoc, tagName) {
   return SearchTag.findOne({word: tagName})
     .then((tag) => {
       if (tag) {
-          tag.matching.push(actualDoc._id);
-          return tag.save();
+        tag.matching.push({matchId: actualDoc._id, model: model.modelName});
+        return tag.save();
       } else {
-          var newTag = new SearchTag({word: tagName, matching: [actualDoc._id]});
-          return newTag.save();
+        var newTag = new SearchTag({word: tagName, matching:
+           [{matchId: actualDoc._id, model: model.modelName}]});
+        return newTag.save();
       }
     });
 }
 
-function indexSchemaDocument(schema, doc){
+function indexSchemaDocument(model, doc){
   var addTagByKeyArr = [];
   var actualDoc = doc._doc;
   Object.keys(actualDoc).forEach((key) =>{
@@ -53,7 +54,7 @@ function indexSchemaDocument(schema, doc){
       var addTagArr = [];
       tags.forEach((tag) => {
           addTagArr.push(() => {
-              return handleNewDocumentTag(actualDoc, tag);
+              return handleNewDocumentTag(model, actualDoc, tag);
           })
       });
       return Promise.all(addTagArr.map(f => f()));
@@ -63,11 +64,11 @@ function indexSchemaDocument(schema, doc){
   return Promise.all(addTagByKeyArr.map(f => f()));
 }
 
-module.exports = function (schema){
-  schema.post('save', function(doc) {
-    return indexSchemaDocument(schema, doc).then(() =>{
+module.exports = function (model){
+  model.schema.post('save', function(doc, next) {
+    indexSchemaDocument(model, doc).then(() =>{
         console.log("Schema document was indexed.");
-        return Promise.resolve();
+        next();
     });
   });
 }
