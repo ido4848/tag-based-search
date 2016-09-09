@@ -502,4 +502,4 @@ var rawStopWords = `את
 
 var stopWords = rawStopWords.split('\n');
 
-export default stopWords;
+module.exports = stopWords;

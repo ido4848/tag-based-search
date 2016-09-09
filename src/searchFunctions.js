@@ -2,11 +2,9 @@
  * Created by ido4848 on 13/08/16.
  */
 
-import SearchSession from '../models/searchSessions';
+/*
 import SearchTags from '../models/searchTags';
 import uuid from 'node-uuid';
-import categoryModelMap from './categoryModelMap';
-const categoryToModel = categoryModelMap.categoryToModel;
 
 const DEFAULT_LIMIT = 10;
 
@@ -111,3 +109,4 @@ var searchFunctions = {
 };
 
 export default searchFunctions;
+*/
