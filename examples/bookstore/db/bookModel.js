@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var tagBasedSearch = require('../../../index');
+var tagBasedSearchEngine = require('../../../index');
 
 var bookSchema = mongoose.Schema({
     title: String,
@@ -9,6 +9,6 @@ var bookSchema = mongoose.Schema({
 
 
 var Book = mongoose.model('Book', bookSchema);
-tagBasedSearch.indexModel(Book);
+tagBasedSearchEngine.indexModel(Book);
 
 module.exports = Book;

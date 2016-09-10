@@ -1,10 +1,10 @@
 var initDb = require('./db/initDb');
-var initSearchEngine = require('../../init');
+var tagBasedSearchEngine = require('../../index');
 var models = undefined;
 
 function init(){
   return initDb.init()
-    .then(initSearchEngine)
+    .then(tagBasedSearchEngine.init)
     .then(()=>{
       models = require('./db/models');
       return Promise.resolve();

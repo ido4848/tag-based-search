@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var tagBasedSearch = require('../../../index');
+var tagBasedSearchEngine = require('../../../index');
 
 var authorSchema = mongoose.Schema({
     firstName: String,
@@ -10,6 +10,6 @@ var authorSchema = mongoose.Schema({
 });
 
 var Author = mongoose.model('Author', authorSchema);
-tagBasedSearch.indexModel(Author);
+tagBasedSearchEngine.indexModel(Author);
 
 module.exports = Author;

@@ -1,11 +1,10 @@
-var init = require('./src/init');
-
 var searchEngine = {
   initialized: false,
+
   init: function(options) {
     options = options ? options : {};
     try {
-      require('./searchTagModel');
+      require('./src/searchTagModel');
     } catch(e) {
       return Promise.reject(e);
     }
@@ -15,12 +14,13 @@ var searchEngine = {
     }
     return Promise.resolve();
   },
+
   get indexModel(){
     if(!initialized){
       throw new Error("Search engine was initialized!");
     }
     return require('./src/indexModel');
-  }
+  },
 
   get search(){
     if(!initialized){
