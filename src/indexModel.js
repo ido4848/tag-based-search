@@ -29,17 +29,17 @@ function handleNewDocumentTag(model, actualDoc, tagName) {
   return SearchTag.findOne({word: tagName})
     .then((tag) => {
       if (tag) {
-        tag.matching.push({matchId: actualDoc._id, model: model.modelName});
+        tag.matching.push({match: actualDoc._id, model: model.modelName});
         return tag.save();
       } else {
         var newTag = new SearchTag({word: tagName, matching:
-           [{matchId: actualDoc._id, model: model.modelName}]});
+           [{match: actualDoc._id, model: model.modelName}]});
         return newTag.save();
       }
     });
 }
 
-function indexSchemaDocument(model, doc){
+function indexModelDocument(model, doc){
   var addTagByKeyArr = [];
   var actualDoc = doc._doc;
   Object.keys(actualDoc).forEach((key) =>{
@@ -66,7 +66,7 @@ function indexSchemaDocument(model, doc){
 
 module.exports = function (model){
   model.schema.post('save', function(doc, next) {
-    indexSchemaDocument(model, doc).then(() =>{
+    indexModelDocument(model, doc).then(() =>{
         console.log("Schema document was indexed.");
         next();
     });

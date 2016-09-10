@@ -1,7 +1,7 @@
-var indexSchema = require('./src/indexSchema');
+var indexModel = require('./src/indexModel');
 var search = require('./src/search');
 
 module.exports = {
-  indexSchema: indexSchema,
+  indexModel: indexModel,
   search: search
 };

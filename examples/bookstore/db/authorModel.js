@@ -10,6 +10,6 @@ var authorSchema = mongoose.Schema({
 });
 
 var Author = mongoose.model('Author', authorSchema);
-tagBasedSearch.indexSchema(Author);
+tagBasedSearch.indexModel(Author);
 
 module.exports = Author;

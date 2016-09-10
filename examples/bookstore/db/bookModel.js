@@ -9,6 +9,6 @@ var bookSchema = mongoose.Schema({
 
 
 var Book = mongoose.model('Book', bookSchema);
-tagBasedSearch.indexSchema(Book);
+tagBasedSearch.indexModel(Book);
 
 module.exports = Book;
