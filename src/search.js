@@ -1,6 +1,6 @@
 var SearchTag = require('./searchTagModel');
 
-module.exports = function(tagName) {
+function search(tagName, options) {
   return SearchTag.findOne({word: tagName})
   .then((tag) => {
     var matching = tag.matching;
@@ -21,3 +21,9 @@ module.exports = function(tagName) {
       });
   });
 }
+
+module.exports = function(options){
+    return function(tagName){
+      return search(tagName, options);
+    }
+};

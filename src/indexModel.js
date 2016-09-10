@@ -64,11 +64,19 @@ function indexModelDocument(model, doc){
   return Promise.all(addTagByKeyArr.map(f => f()));
 }
 
-module.exports = function (model){
+function indexModel (model, options){
   model.schema.post('save', function(doc, next) {
     indexModelDocument(model, doc).then(() =>{
-        console.log("Schema document was indexed.");
+        if(!options.quiet){
+          console.log("Schema document was indexed.");
+        }
         next();
     });
   });
+}
+
+module.exports = function(options){
+  return function(model){
+    return indexModel(model, options);
+  }
 }

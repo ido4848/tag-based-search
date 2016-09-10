@@ -4,7 +4,7 @@ var models = undefined;
 
 function init(){
   return initDb.init()
-    .then(tagBasedSearchEngine.init)
+    .then(() => {return tagBasedSearchEngine.init({quiet: true})})
     .then(()=>{
       models = require('./db/models');
       return Promise.resolve();
@@ -14,8 +14,7 @@ function init(){
 function mainLogic(){
   var book = new models.Book({title:"winnie the poo the"});
   book.save().then((book) => {
-    var searchEngine = require('../../index');
-    searchEngine.search("poo").then((results) => {
+    tagBasedSearchEngine.search("poo").then((results) => {
       console.log("Search results for poo:");
       console.log(results);
     });
