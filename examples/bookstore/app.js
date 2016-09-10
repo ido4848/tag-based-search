@@ -12,7 +12,7 @@ function init(){
 }
 
 function mainLogic(){
-  var book = new models.Book({title:"winnie the poo the"});
+  var book = new models.Book({title:"winnie the poo"});
   book.save().then((book) => {
     tagBasedSearchEngine.search("poo").then((results) => {
       console.log("Search results for poo:");
