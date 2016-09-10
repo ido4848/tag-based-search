@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/ido4848/tag-based-search#readme",
   "dependencies": {
-    "mongoose": "^4.6.0"
+    "mongoose": "^4.6.0",
+    "stopwords-json": "^1.1.0"
   }
 }
